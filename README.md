@@ -281,8 +281,8 @@ Where crop recommendation data is:
 | ------------------------|--------|----------------------------------------------------------------------------|
 | crop_type               | string | Type of crop recommended at the provided location.                         |
 | coordinates             | string | Coordinates of the provided location.                                      |
-| yield estimate          | string | Yield estimate at the provide location in kg per Are.                      |
-| net revenue             | string | net revenue at the provide location in RWF.                                |
+| yield_estimate          | string | Yield estimate at the provide location in kg per Are.                      |
+| net_revenue             | string | net revenue at the provide location in RWF.                                |
 | province                | string | Province of the provided location.                                         |
 | district                | string | District of the provided location.                                         |
 | sector                  | string | Sector of the provided location.                                           |
