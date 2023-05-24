@@ -146,7 +146,7 @@ Accept: application/json
 Accept-Charset: utf-8
 ```
 
-The response contians the updated information about the land.
+The response contains the updated information about the land.
 
 Example response:
 
@@ -231,7 +231,7 @@ Where lime/fertilizer recommendation data is:
 | fertilizer_quantity     | string | Quantity of fertilizer recommended at the provided location in kg per Are. |
 | lime_type               | string | Type of lime recommended at the provided location.                         |
 | lime_quantity           | string | Quantity of lime recommended at the provided location in kg per Are.       |
-| coordinates             | string | Coordinates risk at the provided location.                                 |
+| coordinates             | string | Coordinates of the provided location.                                 |
 | province                | string | Province of the provided location.                                         |
 | district                | string | District of the provided location.                                         |
 | sector                  | string | Sector of the provided location.                                           |
@@ -248,7 +248,7 @@ Possible errors:
 
 #### Getting the crop type recommendation
 
-Returns the recommendation of the crop tyoe on farmer's land on specific location. The crop type recommendation is provided by RAB researcher.
+Returns the recommendation of the crop type on farmer's land on specific location. The crop type recommendation is provided by RAB researcher.
 
 ```
 GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/crop/?latitude={{X}}&longitude={{Y}}
@@ -263,7 +263,9 @@ Content-Type: application/json; charset=utf-8
 {
   "data": {
     "crop_type": "potatoes",
-    "coordinates": [43434, 64366]
+    "coordinates": [43434, 64366],
+    "Yield estimate":"50",
+    "Net revenue":"90000"
     "province":"North",
     "district":"Gakenke",
     "sector":"Rusasa",
@@ -278,7 +280,9 @@ Where crop recommendation data is:
 | Field                   | Type   | Description                                                                |
 | ------------------------|--------|----------------------------------------------------------------------------|
 | crop_type               | string | Type of crop recommended at the provided location.                         |
-| coordinates             | string | Coordinates risk at the provided location.                                 |
+| coordinates             | string | Coordinates of the provided location.                                      |
+| yield estimate          | string | Yield estimate at the provide location in kg per Are.                      |
+| net revenue             | string | net revenue at the provide location in RWF.                                |
 | province                | string | Province of the provided location.                                         |
 | district                | string | District of the provided location.                                         |
 | sector                  | string | Sector of the provided location.                                           |
