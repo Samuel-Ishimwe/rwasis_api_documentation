@@ -264,8 +264,8 @@ Content-Type: application/json; charset=utf-8
   "data": {
     "crop_type": "potatoes",
     "coordinates": [43434, 64366],
-    "Yield estimate":"50",
-    "Net revenue":"90000"
+    "yield_estimate":"50",
+    "net_revenue":"90000"
     "province":"North",
     "district":"Gakenke",
     "sector":"Rusasa",
