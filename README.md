@@ -194,10 +194,11 @@ Possible errors:
 
 #### Getting the lime and fertilizer recommendation
 
-Returns the recommendation of the erosion on farmer's land on specific location provided by land UPI coordinate (Point geographically represented by X{latitude},Y{longitude}).
+Accepts a crop parameter and Returns the recommendation of the fertilizers allowed on farmer's land on specific location provided by land UPI coordinate (Point geographically represented by X{latitude},Y{longitude}).
+
 
 ```
-GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/fertilizer/?latitude={{X}}&longitude={{Y}}
+GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/fertilizer/?latitude={{X}}&longitude={{Y}}?crop={{crop}}
 ```
 
 Example response:
@@ -208,10 +209,21 @@ Content-Type: application/json; charset=utf-8
 
 {
   "data": {
-    "fertilizer_type": "Uree",
-    "fertilizer_quantity": "23.44",
-    "lime_type": "calitic",
-    "lime_quantity": "234",
+    "fertilizer": [
+        {
+          "type": "Uree",
+          "quantity": "23.44"
+        },
+        {
+          "type": "NPK",
+          "quantity": "2.3"
+        }],
+    "lime" : [
+        {
+          "type": "calitic",
+          "quantity": "234",
+        }
+     ],
     "investment_cost":"123",
     "coordinates": [43434, 64366]
     "province":"North",
@@ -225,18 +237,16 @@ Content-Type: application/json; charset=utf-8
 
 Where lime/fertilizer recommendation data is:
 
-| Field                   | Type   | Description                                                                |
-| ------------------------|--------|----------------------------------------------------------------------------|
-| fertilizer_type         | string | Type of fertilizer recommended at the provided location.                   |
-| fertilizer_quantity     | string | Quantity of fertilizer recommended at the provided location in kg per Are. |
-| lime_type               | string | Type of lime recommended at the provided location.                         |
-| lime_quantity           | string | Quantity of lime recommended at the provided location in kg per Are.       |
-| coordinates             | string | Coordinates of the provided location.                                 |
-| province                | string | Province of the provided location.                                         |
-| district                | string | District of the provided location.                                         |
-| sector                  | string | Sector of the provided location.                                           |
-| cell                    | string | Cell of the provided location.                                             |
-| village                 | string | Village of the provided location.                                          |
+| Field                   | Type   | Description                                                                     |
+| ------------------------|--------|---------------------------------------------------------------------------------|
+| fertilizer              | array  | list of  type and quantity of fertilizers recommended at the provided location. |
+| lime                    | array  | list of type and quantity of lime recommended at the provided location.         |
+| coordinates             | string | Coordinates of the provided location.                                           |
+| province                | string | Province of the provided location.                                              |
+| district                | string | District of the provided location.                                              |
+| sector                  | string | Sector of the provided location.                                                |
+| cell                    | string | Cell of the provided location.                                                  |
+| village                 | string | Village of the provided location.                                               |
 
 Possible errors:
 
