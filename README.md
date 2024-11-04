@@ -33,7 +33,7 @@ In order to get access to the RWASIS resources, you will need an access token. A
 
 ### 2.1. Registration and access 
 
-For using RWASIS  API, your organization must have an agreement with RAB who is the owner of the RWASIS. For more information contact `eric.nsabimana@rab.gov.rw`.
+For using RWASIS  API, your organization must have an agreement with RAB who is the owner of the RWASIS. For more information contact `rwasis@rab.gov.rw`.
 
 To use this API you must have valid credentials (email and passowrd) from the admin of the system.
 
