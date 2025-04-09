@@ -12,9 +12,8 @@ This repository contains the documentation for [RWASIS](https://rwasis.rab.gov.r
   - [Registration-and-access](#21-registration-and-access)
   - [Access tokens](#22-access-tokens)
 - [Resources](#3-resources)
-  - [Erosion](#31-erosion)
-  - [Fertilizer](#32-fertilizer)
-  - [Crop type](#33-crop-type)
+  - [Querying using administrative UPI](#31-Querying-using-UPI)
+  - [Querying using administrative location](#32-Querying-using-administrative-location)
 - [Testing](#4-testing)
 
 ## 1. Overview
