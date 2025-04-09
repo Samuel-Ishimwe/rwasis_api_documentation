@@ -124,21 +124,21 @@ With the following parameters:
 
 ## 3. Resources
 
-The API is RESTful and arranged around resources. All requests must be made with an access token. All requests must be made using `https`.
+The API returns informations related to the soil erosion, crops and recommended fertilizers for a specific UPI, or administrative boundary; starting from province up to the village level. All requests must be made with an access token. All requests must be made using `https`.
 
-### 3.1. Erosion
+### 3.1. Querying using UPI
 
-#### Getting the authenticated user’s details
-Returns details of the erosion on farmer's land on specific location provided by land UPI coordinate (Point geographically represented by X{latitude},Y{longitude}).
+#### Getting the land erosion, crops and recommended fertilizers details
+Returns details of the soil erosion, crops and recommended fertilizers on farmer's land on specific location provided by land UPI .
 
 ```
-GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/erosion?latitude={{X}}&longitude={{Y}}
+GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/upi?{{}}
 ```
 
 Example request:
 
 ```
-GET /v1/api/erosion HTTP/1.1
+GET /v1/api/ HTTP/1.1
 Host: rwasis.rab.gov.rw
 Authorization: Bearer 181d415f34379af07b2c11d144dfbe35d
 Content-Type: application/json
@@ -155,33 +155,66 @@ HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
 {
-  "data": {
-    "risk": "HIGH",
-    "landcover": "Bare Land",
-    "recommended": "Agroforest",
-    "coordinates": [43434, 64366]
-    "province":"North",
-    "district":"Gakenke",
-    "sector":"Rusasa",
-    "cell":"Nyundo",
-    "village":"kabuye",
-  }
+    "data" : {
+        "administrative_location" : {
+            "province":"North",
+            "district":"Gakenke",
+            "sector":"Rusasa",
+            "cell":"Nyundo",
+            "village":"kabuye"
+        },
+        "erosion": {
+            "risk_category" : "HIGH",
+            "landcover": "Bare Land",
+            "recommended": "Agroforest"
+        },
+        "crops" : {
+            "corn": {
+                "variety": "Hybrid",
+                "fertilizers": [
+                    {
+                        "brend": "N",
+                        "amount": 100,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    },
+                    {
+                        "brend": "P",
+                        "amount": 50,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    }
+                ],
+                "lime" : [
+
+                ]
+            },
+            "soybean": {
+                "variety": "Conventional",
+                "fertilizers": [
+                    {
+                        "brend": "N",
+                        "amount": 100,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    },
+                    {
+                        "brend": "P",
+                        "amount": 50,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    }
+                ],
+                "lime" : [
+                    
+                ]
+            }
+
+        }
+    }
 }
 ```
 
-Where a erosion object is:
-
-| Field         | Type   | Description                                     |
-| --------------|--------|-------------------------------------------------|
-| risk          | string | Erosion risk at the provided location.          |
-| landcover     | string | Landcover at the provided location.             |
-| recommended   | string | Recommended risk at the provided location.      |
-| coordinates   | string | Coordinates risk at the provided location.      |
-| province      | string | Province of the provided location.              |
-| district      | string | District of the provided location.              |
-| sector        | string | Sector of the provided location.                |
-| cell          | string | Cell of the provided location.                  |
-| village       | string | Village of the provided location.               |
 
 Possible errors:
 
@@ -190,15 +223,15 @@ Possible errors:
 | 401 Unauthorized     | The `accessToken` is invalid or has been revoked. |
 
 
-### 3.2. Fertilizer
+### 3.2. Querying using administrative location
 
-#### Getting the lime and fertilizer recommendation
+#### Getting the land erosion, crops and recommended fertilizers details
 
-Accepts a crop parameter and Returns the recommendation of the fertilizers allowed on farmer's land on specific location provided by land UPI coordinate (Point geographically represented by X{latitude},Y{longitude}).
+Returns details of the soil erosion, crops and recommended fertilizers on farmer's land on specific location provided by administrative boundary; starting from province up to the village level.
 
 
 ```
-GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/fertilizer/?latitude={{X}}&longitude={{Y}}?crop={{crop}}
+GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/amdin/?province={{province}}&district={{district}}&sector={{sector}}&cell={{cell}}&village={{village}}
 ```
 
 Example response:
@@ -208,45 +241,65 @@ HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
 {
-  "data": {
-    "fertilizer": [
-        {
-          "type": "Uree",
-          "quantity": "23.44"
+    "data" : {
+        "administrative_location" : {
+            "province":"North",
+            "district":"Gakenke",
+            "sector":"Rusasa",
+            "cell":"Nyundo",
+            "village":"kabuye"
         },
-        {
-          "type": "NPK",
-          "quantity": "2.3"
-        }],
-    "lime" : [
-        {
-          "type": "calitic",
-          "quantity": "234",
+        "erosion": {
+            "risk_category" : "HIGH",
+            "landcover": "Bare Land",
+            "recommended": "Agroforest"
+        },
+        "crops" : {
+            "corn": {
+                "variety": "Hybrid",
+                "fertilizers": [
+                    {
+                        "brend": "N",
+                        "amount": 100,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    },
+                    {
+                        "brend": "P",
+                        "amount": 50,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    }
+                ],
+                "lime" : [
+
+                ]
+            },
+            "soybean": {
+                "variety": "Conventional",
+                "fertilizers": [
+                    {
+                        "brend": "N",
+                        "amount": 100,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    },
+                    {
+                        "brend": "P",
+                        "amount": 50,
+                        "unity" : "kg/ha",
+                        "time" : "sawing"
+                    }
+                ],
+                "lime" : [
+                    
+                ]
+            }
+
         }
-     ],
-    "investment_cost":"123",
-    "coordinates": [43434, 64366]
-    "province":"North",
-    "district":"Gakenke",
-    "sector":"Rusasa",
-    "cell":"Nyundo",
-    "village":"kabuye",
-  }
+    }
 }
 ```
-
-Where lime/fertilizer recommendation data is:
-
-| Field                   | Type   | Description                                                                     |
-| ------------------------|--------|---------------------------------------------------------------------------------|
-| fertilizer              | array  | list of  type and quantity of fertilizers recommended at the provided location. |
-| lime                    | array  | list of type and quantity of lime recommended at the provided location.         |
-| coordinates             | string | Coordinates of the provided location.                                           |
-| province                | string | Province of the provided location.                                              |
-| district                | string | District of the provided location.                                              |
-| sector                  | string | Sector of the provided location.                                                |
-| cell                    | string | Cell of the provided location.                                                  |
-| village                 | string | Village of the provided location.                                               |
 
 Possible errors:
 
@@ -254,59 +307,7 @@ Possible errors:
 | ---------------------|---------------------------------------------------------------------------------------|
 | 401 Unauthorized     | The `accessToken` is invalid                                                          |
 
-### 3.3. Crop type
-
-#### Getting the crop type recommendation
-
-Returns the recommendation of the crop type on farmer's land on specific location. The crop type recommendation is provided by RAB researcher.
-
-```
-GET Accept: application/json Authorization: Bearer `accessToken` https://rwasis.rab.gov.rw/v1/api/crop/?latitude={{X}}&longitude={{Y}}
-```
-
-Example response:
-
-```
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "data": {
-    "crop_type": "potatoes",
-    "coordinates": [43434, 64366],
-    "yield_estimate":"50",
-    "net_revenue":"90000"
-    "province":"North",
-    "district":"Gakenke",
-    "sector":"Rusasa",
-    "cell":"Nyundo",
-    "village":"kabuye",
-  }
-}
-```
-
-Where crop recommendation data is:
-
-| Field                   | Type   | Description                                                                |
-| ------------------------|--------|----------------------------------------------------------------------------|
-| crop_type               | string | Type of crop recommended at the provided location.                         |
-| coordinates             | string | Coordinates of the provided location.                                      |
-| yield_estimate          | string | Yield estimate at the provide location in kg per Are.                      |
-| net_revenue             | string | net revenue at the provide location in RWF.                                |
-| province                | string | Province of the provided location.                                         |
-| district                | string | District of the provided location.                                         |
-| sector                  | string | Sector of the provided location.                                           |
-| cell                    | string | Cell of the provided location.                                             |
-| village                 | string | Village of the provided location.                                          |
-
-Possible errors:
-
-| Error code           | Description                                                                           |
-| ---------------------|---------------------------------------------------------------------------------------|
-| 401 Unauthorized     | The `accessToken` is invalid                                                          |
-
-
-
+                                                       
 
 ## 4. Testing
 
